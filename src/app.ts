@@ -6,7 +6,8 @@ import process, { env } from "process";
 import express, { Request, Response } from "express";
 
 // local imports
-import publicRoutes from "./routes/publicRouter"; // Public public client routes
+import publicRoutes from "./routes/publicRoutes"; // Public client routes
+import adminRoutes from "./routes/adminRoutes"; // admin client routes
 
 // INIT APP
 const app = express();
@@ -16,7 +17,10 @@ const app = express();
 /// MIDDLEWARES
 
 /// ROUTES
+
+// Client Side
 app.use("/", publicRoutes);
+app.use("/sys-admin", publicRoutes);
 
 /// START SERVER
 const port = parseInt(env.PORT ? env.PORT : "") || 3000;
