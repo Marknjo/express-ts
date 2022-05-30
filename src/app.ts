@@ -22,6 +22,17 @@ const app = express();
 /// APP CONFIGS
 
 /// MIDDLEWARES
+// Configure cookie session
+const expires = parseInt(env.SESSION_EXPIRES || "21600", 10);
+const sessionKeys = env.SESSION_KEYS || "my_encrypted_keys";
+
+app.use(
+  cookSession({
+    keys: [sessionKeys],
+    sameSite: "strict",
+    expires: new Date(Date.now() + 1000 * expires),
+  })
+);
 
 // Handle Json body
 app.use(express.json({ limit: "10kb" }));

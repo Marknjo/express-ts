@@ -28,11 +28,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const process_1 = __importStar(require("process"));
 const express_1 = __importDefault(require("express"));
+const cookie_session_1 = __importDefault(require("cookie-session"));
 require("./configs/env.config");
 const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 const publicRoutes_1 = __importDefault(require("./routes/publicRoutes"));
 const adminRoutes_1 = __importDefault(require("./routes/adminRoutes"));
 const app = (0, express_1.default)();
+const expires = parseInt(process_1.env.SESSION_EXPIRES || "21600", 10);
+const sessionKeys = process_1.env.SESSION_KEYS || "my_encrypted_keys";
+app.use((0, cookie_session_1.default)({
+    keys: [sessionKeys],
+    sameSite: "strict",
+    expires: new Date(Date.now() + 1000 * expires),
+}));
 app.use(express_1.default.json({ limit: "10kb" }));
 const apiV = process_1.env.APP_VERSION || "1";
 app.use(`/api/${apiV}/user`, userRoutes_1.default);
