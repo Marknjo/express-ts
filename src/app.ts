@@ -5,6 +5,9 @@ import process, { env } from "process";
 // 3rd Party
 import express, { Request, Response } from "express";
 
+// local imports
+import publicRoutes from "./routes/publicRouter"; // Public public client routes
+
 // INIT APP
 const app = express();
 
@@ -13,9 +16,7 @@ const app = express();
 /// MIDDLEWARES
 
 /// ROUTES
-app.use("/", (req: Request, res: Response) => {
-  res.send("Successful request");
-});
+app.use("/", publicRoutes);
 
 /// START SERVER
 const port = parseInt(env.PORT ? env.PORT : "") || 3000;
