@@ -5,6 +5,8 @@
 /// imports
 import express from "express";
 
+import * as clientCtr from "../controllers/clientController";
+
 /// INIT ROUTER
 const router = express.Router();
 
@@ -21,9 +23,7 @@ router.route("/login").get((req, res) => {
 /**
  * Home Page Route
  */
-router.route("/").get((req, res) => {
-  res.send("user login Page");
-});
+router.route("/").get(clientCtr.homePage);
 
 /// EXPORT ROUTES
 export default router;
