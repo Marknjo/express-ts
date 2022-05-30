@@ -6,8 +6,10 @@ import process, { env } from "process";
 import express, { Request, Response } from "express";
 
 // local imports
-import publicRoutes from "./routes/publicRoutes"; // Public client routes
-import adminRoutes from "./routes/adminRoutes"; // admin client routes
+import userRouter from "./routes/userRoutes"; // user api routes
+
+import publicRouter from "./routes/publicRoutes"; // Public client routes
+import adminRouter from "./routes/adminRoutes"; // admin client routes
 
 // INIT APP
 const app = express();
@@ -16,11 +18,18 @@ const app = express();
 
 /// MIDDLEWARES
 
+// Handle Json body
+app.use(express.json({ limit: "10kb" }));
+
 /// ROUTES
+// API
+const apiV = env.APP_VERSION || "1";
+
+app.use(`/api/${apiV}/user`, userRouter);
 
 // Client Side
-app.use("/", publicRoutes);
-app.use("/sys-admin", publicRoutes);
+app.use("/", publicRouter);
+app.use("/sys-admin", adminRouter);
 
 /// START SERVER
 const port = parseInt(env.PORT ? env.PORT : "") || 3000;

@@ -28,10 +28,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const process_1 = __importStar(require("process"));
 const express_1 = __importDefault(require("express"));
+const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 const publicRoutes_1 = __importDefault(require("./routes/publicRoutes"));
+const adminRoutes_1 = __importDefault(require("./routes/adminRoutes"));
 const app = (0, express_1.default)();
+app.use(express_1.default.json({ limit: "10kb" }));
+const apiV = process_1.env.APP_VERSION || "1";
+app.use(`/api/${apiV}/user`, userRoutes_1.default);
 app.use("/", publicRoutes_1.default);
-app.use("/sys-admin", publicRoutes_1.default);
+app.use("/sys-admin", adminRoutes_1.default);
 const port = parseInt(process_1.env.PORT ? process_1.env.PORT : "") || 3000;
 const host = process_1.env.HOST || "127.0.0.1";
 const server = app.listen(port, host, () => {
