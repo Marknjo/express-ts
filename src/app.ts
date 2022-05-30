@@ -1,11 +1,16 @@
 /// IMPRTS
 // Global
 import process, { env } from "process";
+import crypto from "crypto";
 
 // 3rd Party
 import express, { Request, Response } from "express";
+import cookSession from "cookie-session";
+import dotenv from "dotenv";
 
 // local imports
+import "./configs/env.config";
+
 import userRouter from "./routes/userRoutes"; // user api routes
 
 import publicRouter from "./routes/publicRoutes"; // Public client routes
@@ -32,7 +37,7 @@ app.use("/", publicRouter);
 app.use("/sys-admin", adminRouter);
 
 /// START SERVER
-const port = parseInt(env.PORT ? env.PORT : "") || 3000;
+const port = parseInt(env.PORT || "3000");
 const host = env.HOST || "127.0.0.1";
 
 const server = app.listen(port, host, () => {
