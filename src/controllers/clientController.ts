@@ -3,12 +3,23 @@
 import { RequestHandler } from "express";
 
 /// MIDDLEWARE
-const htmlTemplate = (content: string) => {
+const htmlTemplate = (content: string, title?: string) => {
   return `
-      <div style="display: flex; align-items: center; flex-flow: column nowrap; ">
-        <h1>Home Page</h1>
-        ${content}
-      </div>
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="UTF-8">
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>App ${title ? "| " + title : ""}</title>
+      </head>
+        <body>
+          <div style="display: flex; align-items: center; flex-flow: column nowrap; ">
+            <h1>Home Page</h1>
+            ${content}
+          </div>
+        </body>
+      </html>
     `;
 };
 
@@ -31,7 +42,7 @@ export const homePage: RequestHandler = (req, res) => {
 
   /// Show UI based on login status
   if (req.session && !req.session.isLoggedIn) {
-    res.send(htmlTemplate(loginErrorHtmlTmp));
+    res.send(htmlTemplate(loginErrorHtmlTmp, "Home page"));
 
     return;
   }
@@ -42,13 +53,13 @@ export const homePage: RequestHandler = (req, res) => {
   const timeDiff = sessionExpires > Date.now();
 
   if (!timeDiff) {
-    res.send(htmlTemplate(loginErrorHtmlTmp));
+    res.send(htmlTemplate(loginErrorHtmlTmp, "Home page"));
 
     return;
   }
 
   /// USER IS LOGGED IN
-  res.send(htmlTemplate(successLoggedInuserHtmlTmp));
+  res.send(htmlTemplate(successLoggedInuserHtmlTmp, "Home page"));
 };
 
 /// Admin handlers
