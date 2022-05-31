@@ -16,9 +16,7 @@ const router = express.Router();
 /**
  * Login Page Route
  */
-router.route("/login").get((req, res) => {
-  res.send("login page");
-});
+router.route("/login").get(clientCtr.getLoginPage);
 
 /**
  * Home Page Route

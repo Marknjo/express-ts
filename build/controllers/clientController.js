@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.homePage = void 0;
+exports.getLoginPage = exports.homePage = void 0;
 const htmlTemplate = (content, title) => {
     return `
       <!DOCTYPE html>
@@ -42,3 +42,35 @@ const homePage = (req, res) => {
     res.send(htmlTemplate(successLoggedInuserHtmlTmp, "Home page"));
 };
 exports.homePage = homePage;
+const getLoginPage = (req, res) => {
+    if (req.session && req.session.isLoginIn) {
+        res.redirect("/");
+        return;
+    }
+    const loginTemplate = `
+     <form 
+       action="/user/login"
+       method="POST"
+       style="display: flex; align-items: center; flex-flow: column nowrap; margin: 20px 40px;"
+     >
+
+        <div style="margin-bottom: 15px">
+          <label for="email">Email Address</Label>
+          <input type="email" name="email" id="email" required>
+        </div>
+
+
+        <div style="margin-bottom: 15px">
+          <label for="password">Password</Label>
+          <input type="password" name="password" id="password" required>
+        </div>
+
+
+        <div style="margin-bottom: 15px">
+          <button type="submit"> Login </button>
+        </div>
+     </form>
+  `;
+    res.send(htmlTemplate(loginTemplate, "Login Page"));
+};
+exports.getLoginPage = getLoginPage;

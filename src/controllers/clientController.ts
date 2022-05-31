@@ -27,6 +27,13 @@ const htmlTemplate = (content: string, title?: string) => {
 // @TODO: Home page, login page, dashboard
 
 /// Public handlers
+
+/**
+ * Handles Home Page of the app
+ * @param req Express request object
+ * @param res Express Response object
+ * @returns sends response to user based on the condition
+ */
 export const homePage: RequestHandler = (req, res) => {
   const loginErrorHtmlTmp = `
     <p>You are not logged in.</p>
@@ -60,6 +67,48 @@ export const homePage: RequestHandler = (req, res) => {
 
   /// USER IS LOGGED IN
   res.send(htmlTemplate(successLoggedInuserHtmlTmp, "Home page"));
+};
+
+/**
+ * Handles Login Page of the app
+ * @param req Express request object
+ * @param res Express Response object
+ * @returns Renders login html form
+ */
+export const getLoginPage: RequestHandler = (req, res) => {
+  // Check if user is logged in -> Send user to home page with message already logged in
+  if (req.session && req.session.isLoginIn) {
+    res.redirect("/");
+    return;
+  }
+
+  // User not logged in -> Send the html template
+  const loginTemplate = `
+     <form 
+       action="/user/login"
+       method="POST"
+       style="display: flex; align-items: center; flex-flow: column nowrap; margin: 20px 40px;"
+     >
+
+        <div style="margin-bottom: 15px">
+          <label for="email">Email Address</Label>
+          <input type="email" name="email" id="email" required>
+        </div>
+
+
+        <div style="margin-bottom: 15px">
+          <label for="password">Password</Label>
+          <input type="password" name="password" id="password" required>
+        </div>
+
+
+        <div style="margin-bottom: 15px">
+          <button type="submit"> Login </button>
+        </div>
+     </form>
+  `;
+
+  res.send(htmlTemplate(loginTemplate, "Login Page"));
 };
 
 /// Admin handlers

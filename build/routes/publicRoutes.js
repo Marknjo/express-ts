@@ -29,8 +29,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const clientCtr = __importStar(require("../controllers/clientController"));
 const router = express_1.default.Router();
-router.route("/login").get((req, res) => {
-    res.send("login page");
-});
+router.route("/login").get(clientCtr.getLoginPage);
 router.route("/").get(clientCtr.homePage);
 exports.default = router;
