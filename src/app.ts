@@ -37,11 +37,20 @@ app.use(
 // Handle Json body
 app.use(express.json({ limit: "10kb" }));
 
+/// Handle income url encoded content
+app.use(
+  express.urlencoded({
+    type: "application/x-www-form-urlencoded",
+    limit: "10kb",
+    extended: false,
+  })
+);
+
 /// ROUTES
 // API
 const apiV = env.APP_VERSION || "1";
 
-app.use(`/api/${apiV}/user`, userRouter);
+app.use(`/api/v${apiV}/users`, userRouter);
 
 // Client Side
 app.use("/", publicRouter);

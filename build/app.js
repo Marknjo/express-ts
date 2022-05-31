@@ -42,8 +42,13 @@ app.use((0, cookie_session_1.default)({
     expires: new Date(Date.now() + 1000 * expires),
 }));
 app.use(express_1.default.json({ limit: "10kb" }));
+app.use(express_1.default.urlencoded({
+    type: "application/x-www-form-urlencoded",
+    limit: "10kb",
+    extended: false,
+}));
 const apiV = process_1.env.APP_VERSION || "1";
-app.use(`/api/${apiV}/user`, userRoutes_1.default);
+app.use(`/api/v${apiV}/users`, userRoutes_1.default);
 app.use("/", publicRoutes_1.default);
 app.use("/sys-admin", adminRoutes_1.default);
 const port = parseInt(process_1.env.PORT || "3000");

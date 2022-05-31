@@ -4,7 +4,7 @@
 /// IMPORTS
 
 import { Request, Response, Router } from "express";
-import { userInfo } from "os";
+import * as authCtr from "../controllers/authController";
 
 // Define body interface
 interface RequestWithBody extends Request {
@@ -21,46 +21,7 @@ const router = Router();
 /**
  * Protected route
  */
-router.route("/login").post((req: RequestWithBody, res: Response) => {
-  const { email, password } = req.body;
-
-  /// Validate
-  if ((!email && !password) || (email && !email.includes("@"))) {
-    res.status(422).json({
-      status: "failed",
-      data: {
-        message:
-          "User or password error. Please provide a valid email and password.",
-      },
-    });
-
-    return;
-  }
-
-  /// Check user credentials
-  if (email !== "marcus@example.io" || password !== "test1234") {
-    res.status(400).json({
-      status: "failed",
-      data: {
-        message:
-          "User or password invalid. Please provide a valid email or password",
-      },
-    });
-
-    return;
-  }
-
-  /// create a login session
-  // @TODO: Create a login session
-
-  /// Send a message of successful login
-  res.status(200).json({
-    status: "success",
-    data: {
-      message: "You have sucessfully logged in",
-    },
-  });
-});
+router.route("/login").post(authCtr.loginUseHandler);
 
 /// EXPORT USER API ROUTER
 export default router;

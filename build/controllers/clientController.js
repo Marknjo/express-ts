@@ -13,7 +13,7 @@ const htmlTemplate = (content, title) => {
       </head>
         <body>
           <div style="display: flex; align-items: center; flex-flow: column nowrap; ">
-            <h1>Home Page</h1>
+            ${title ? "<h1>" + title + "</h1>" : ""}
             ${content}
           </div>
         </body>
@@ -49,24 +49,24 @@ const getLoginPage = (req, res) => {
     }
     const loginTemplate = `
      <form 
-       action="/user/login"
+       action="/api/v1/users/login"
        method="POST"
        style="display: flex; align-items: center; flex-flow: column nowrap; margin: 20px 40px;"
      >
 
-        <div style="margin-bottom: 15px">
+        <div style="margin-bottom: 15px; display: flex; align-items: start; flex-flow: column nowrap;">
           <label for="email">Email Address</Label>
           <input type="email" name="email" id="email" required>
         </div>
 
 
-        <div style="margin-bottom: 15px">
+        <div style="margin-bottom: 15px; display: flex; align-items: start; flex-flow: column nowrap;">
           <label for="password">Password</Label>
           <input type="password" name="password" id="password" required>
         </div>
 
 
-        <div style="margin-bottom: 15px">
+        <div style="margin-bottom: 15px; display: block">
           <button type="submit"> Login </button>
         </div>
      </form>
