@@ -27,4 +27,5 @@ const express_1 = require("express");
 const authCtr = __importStar(require("../controllers/authController"));
 const router = (0, express_1.Router)();
 router.route("/login").post(authCtr.loginUseHandler);
+router.route("/logout").get(authCtr.logoutUserHandler);
 exports.default = router;

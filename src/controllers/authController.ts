@@ -78,4 +78,25 @@ export const loginUseHandler: RequestHandler = (req, res) => {
   res.redirect("/login");
 };
 
+/**
+ * Handles user logout action
+ *
+ * Stamp user as a valid logged in user
+ *
+ * @param req Express request object
+ * @param res Express Response object
+ * @returns Sends user to the login page
+ */
+export const logoutUserHandler: RequestHandler = (req, res) => {
+  ///
+  if (req.session && req.session.isLoggedIn) {
+    req.session.isLoggedIn = undefined;
+    res.redirect("/login");
+    return;
+  }
+
+  /// Something is wrong with the session object
+  res.redirect(req.originalUrl);
+};
+
 /// CRUD HNDLERS

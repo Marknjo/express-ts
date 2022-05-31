@@ -19,9 +19,14 @@ const router = Router();
 /// DEFINE ROUTES
 
 /**
- * Protected route
+ * Handle user login route
  */
 router.route("/login").post(authCtr.loginUseHandler);
+
+/**
+ * Logout user
+ */
+router.route("/logout").get(authCtr.logoutUserHandler);
 
 /// EXPORT USER API ROUTER
 export default router;

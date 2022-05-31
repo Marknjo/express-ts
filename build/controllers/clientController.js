@@ -27,7 +27,7 @@ const getHomePage = (req, res) => {
     `;
     const successLoggedInuserHtmlTmp = `
     <p>You are currently logged in.</p>
-    <a href="/logout" style="display: block">Logout</a>
+    <a href="/api/v1/users/logout" style="display: block">Logout</a>
     `;
     if (req.session && !req.session.isLoggedIn) {
         res.send(htmlTemplate(loginErrorHtmlTmp, "Home page"));

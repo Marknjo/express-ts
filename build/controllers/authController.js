@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loginUseHandler = void 0;
+exports.logoutUserHandler = exports.loginUseHandler = void 0;
 const loginUseHandler = (req, res) => {
     const { email, password } = req.body;
     if (!email && !password) {
@@ -39,3 +39,12 @@ const loginUseHandler = (req, res) => {
     res.redirect("/login");
 };
 exports.loginUseHandler = loginUseHandler;
+const logoutUserHandler = (req, res) => {
+    if (req.session && req.session.isLoggedIn) {
+        req.session.isLoggedIn = undefined;
+        res.redirect("/login");
+        return;
+    }
+    res.redirect(req.originalUrl);
+};
+exports.logoutUserHandler = logoutUserHandler;

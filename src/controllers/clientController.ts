@@ -42,7 +42,7 @@ export const getHomePage: RequestHandler = (req, res) => {
 
   const successLoggedInuserHtmlTmp = `
     <p>You are currently logged in.</p>
-    <a href="/logout" style="display: block">Logout</a>
+    <a href="/api/v1/users/logout" style="display: block">Logout</a>
     `;
 
   /// USER IS NOT LOGGED IN
