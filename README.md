@@ -1,13 +1,13 @@
-# Expressjs With Tyoescriot
+# Expressjs With Typescript
 
 ## :balloon: Overview
 
-Testing TypeScript in Express Apps. Use of Typescript Decorators and normal simple types integration.
+Testing Typescript in Express Apps. Use of Typescript Decorators and normal simple types integration.
 
 ## :anger: Requirement
 
 - Nodejs
-- TypeScript
+- Typescript
 - Expressjs
 
 ## :scroll: QuickStart
