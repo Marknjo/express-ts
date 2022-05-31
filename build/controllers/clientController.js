@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getLoginPage = exports.homePage = void 0;
+exports.getLoginPage = exports.getHomePage = void 0;
 const htmlTemplate = (content, title) => {
     return `
       <!DOCTYPE html>
@@ -20,7 +20,7 @@ const htmlTemplate = (content, title) => {
       </html>
     `;
 };
-const homePage = (req, res) => {
+const getHomePage = (req, res) => {
     const loginErrorHtmlTmp = `
     <p>You are not logged in.</p>
     <a href="/login" style="display: block">Login Now</a>
@@ -41,7 +41,7 @@ const homePage = (req, res) => {
     }
     res.send(htmlTemplate(successLoggedInuserHtmlTmp, "Home page"));
 };
-exports.homePage = homePage;
+exports.getHomePage = getHomePage;
 const getLoginPage = (req, res) => {
     if (req.session && req.session.isLoginIn) {
         res.redirect("/");

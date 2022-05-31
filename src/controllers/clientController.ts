@@ -34,7 +34,7 @@ const htmlTemplate = (content: string, title?: string) => {
  * @param res Express Response object
  * @returns sends response to user based on the condition
  */
-export const homePage: RequestHandler = (req, res) => {
+export const getHomePage: RequestHandler = (req, res) => {
   const loginErrorHtmlTmp = `
     <p>You are not logged in.</p>
     <a href="/login" style="display: block">Login Now</a>

@@ -21,7 +21,7 @@ router.route("/login").get(clientCtr.getLoginPage);
 /**
  * Home Page Route
  */
-router.route("/").get(clientCtr.homePage);
+router.route("/").get(clientCtr.getHomePage);
 
 /// EXPORT ROUTES
 export default router;
