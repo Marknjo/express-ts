@@ -9,6 +9,19 @@ import { RequestHandler } from "express";
 
 /// MIDDLEWARES
 
+export const requireAuth: RequestHandler = (req, res, next) => {
+  // Check for the sesssion
+  if (req.session && !req.session.isLoggedIn) {
+    res
+      .status(403)
+      .send("You are not unauthorized to access this route. Please login.");
+    return;
+  }
+
+  /// User is authorized
+  next();
+};
+
 /// SPECIALIZED METHODS
 // @TODO: add loginHandler, authRequired middleware handlers
 
