@@ -84,8 +84,7 @@ class AuthController {
     /// Valid user goes to the protected route -> By stamping session.isLoggedIn
     if (req.session) {
       req.session.isLoggedIn = true;
-      // res.redirect("/sys-admin");
-      res.redirect("/");
+      res.redirect("/sys-admin");
       return;
     }
 

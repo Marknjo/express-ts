@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var decorators_1 = require("../library/decorators");
 var html_template_1 = require("../library/views/html-template");
+var authController_1 = require("./authController");
 var AdminController = (function () {
     function AdminController() {
     }
@@ -20,6 +21,7 @@ var AdminController = (function () {
     };
     __decorate([
         (0, decorators_1.Get)("/"),
+        (0, decorators_1.Middleware)(authController_1.requireAuth),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", void 0)

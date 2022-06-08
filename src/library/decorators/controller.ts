@@ -25,12 +25,22 @@ export function Controller(routePrefix: string = "") {
       );
 
       /// Add Middlewares
+      const middlewares =
+        Reflect.getMetadata(
+          Metadata.Middlewares,
+          constructor.prototype,
+          methodKey
+        ) || [];
 
-      /// Validate
+      /// Validations
 
       /// Handle route if there is path
       if (routePath) {
-        router[httpMethod](`${routePrefix}${routePath}`, routeHandler);
+        router[httpMethod](
+          `${routePrefix}${routePath}`,
+          ...middlewares,
+          routeHandler
+        );
       }
     }
   };

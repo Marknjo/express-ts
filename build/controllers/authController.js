@@ -58,7 +58,7 @@ var AuthController = (function () {
         }
         if (req.session) {
             req.session.isLoggedIn = true;
-            res.redirect("/");
+            res.redirect("/sys-admin");
             return;
         }
         res.redirect("/login");
