@@ -1,10 +1,9 @@
 /// IMPRTS
 // Global
 import process, { env } from "process";
-import crypto from "crypto";
 
 // 3rd Party
-import express, { Request, Response } from "express";
+import express from "express";
 import cookSession from "cookie-session";
 
 // local imports
@@ -14,10 +13,8 @@ import AppRouter from "./routes/AppRouter";
 
 /// Controllers
 import "./controllers/clientController";
+import "./controllers/authController";
 
-//import userRouter from "./routes/userRoutes"; // user api routes
-
-// import publicRouter from "./routes/publicRoutes"; // Public client routes
 // import adminRouter from "./routes/adminRoutes"; // admin client routes
 
 // INIT APP
@@ -58,7 +55,6 @@ const apiV = env.APP_VERSION || "1";
 
 // Client Side
 // app.use("/sys-admin", adminRouter);
-// app.use("/", publicRouter);
 app.use(AppRouter.init);
 
 /// START SERVER

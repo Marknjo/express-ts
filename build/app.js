@@ -32,6 +32,7 @@ var cookie_session_1 = __importDefault(require("cookie-session"));
 require("./configs/env.config");
 var AppRouter_1 = __importDefault(require("./routes/AppRouter"));
 require("./controllers/clientController");
+require("./controllers/authController");
 var app = (0, express_1.default)();
 var expires = parseInt(process_1.env.SESSION_EXPIRES || "21600", 10);
 var sessionKeys = process_1.env.SESSION_KEYS || "my_encrypted_keys";
