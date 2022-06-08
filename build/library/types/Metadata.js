@@ -6,4 +6,5 @@ var Metadata;
     Metadata["Path"] = "path";
     Metadata["Method"] = "method";
     Metadata["Middlewares"] = "middlewares";
+    Metadata["Validator"] = "validator";
 })(Metadata = exports.Metadata || (exports.Metadata = {}));

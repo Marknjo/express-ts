@@ -16,6 +16,9 @@ exports.Controller = void 0;
 require("reflect-metadata");
 var Metadata_1 = require("../types/Metadata");
 var AppRouter_1 = __importDefault(require("../../routes/AppRouter"));
+var noValidator = function (_1, _2, next) {
+    next();
+};
 function Controller(routePrefix) {
     if (routePrefix === void 0) { routePrefix = ""; }
     return function (constructor) {
@@ -25,8 +28,9 @@ function Controller(routePrefix) {
             var httpMethod = Reflect.getMetadata(Metadata_1.Metadata.Method, constructor.prototype, methodKey);
             var routePath = Reflect.getMetadata(Metadata_1.Metadata.Path, constructor.prototype, methodKey);
             var middlewares = Reflect.getMetadata(Metadata_1.Metadata.Middlewares, constructor.prototype, methodKey) || [];
+            var validator = Reflect.getMetadata(Metadata_1.Metadata.Validator, constructor.prototype, methodKey) || noValidator;
             if (routePath) {
-                router[httpMethod].apply(router, __spreadArray(__spreadArray(["".concat(routePrefix).concat(routePath)], middlewares, false), [routeHandler], false));
+                router[httpMethod].apply(router, __spreadArray(__spreadArray(["".concat(routePrefix).concat(routePath), validator], middlewares, false), [routeHandler], false));
             }
         }
     };

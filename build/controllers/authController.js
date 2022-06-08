@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.requireAuth = void 0;
+exports.validateUserLogin = exports.requireAuth = void 0;
 var process_1 = require("process");
 var decorators_1 = require("../library/decorators");
 var requireAuth = function (req, res, next) {
@@ -22,45 +22,49 @@ var requireAuth = function (req, res, next) {
     next();
 };
 exports.requireAuth = requireAuth;
+var validateUserLogin = function (req, res, next) {
+    var _a = req.body, email = _a.email, password = _a.password;
+    if (!email && !password) {
+        res.status(422).json({
+            status: "failed",
+            data: {
+                message: "Email and passoword empty. Please populate these fields with valid details.",
+            },
+        });
+        return;
+    }
+    if ((email && !email.includes("@")) || (password && password.length < 6)) {
+        res.status(403).json({
+            status: "failed",
+            data: {
+                message: "Email or passoword not in proper format. Please populate these fields with valid details.",
+            },
+        });
+        return;
+    }
+    if ((email && email !== "mark@example.io") ||
+        (password && password !== "test1234")) {
+        res.status(403).json({
+            status: "failed",
+            data: {
+                message: "Email or passoword invalid. Please populate these fields with valid details.",
+            },
+        });
+        return;
+    }
+    if (req.session) {
+        req.session.isLoggedIn = true;
+        res.redirect("/sys-admin");
+        return;
+    }
+    next();
+};
+exports.validateUserLogin = validateUserLogin;
 var apiV = process_1.env.APP_VERSION || "1";
 var AuthController = (function () {
     function AuthController() {
     }
     AuthController.prototype.loginUseHandler = function (req, res) {
-        var _a = req.body, email = _a.email, password = _a.password;
-        if (!email && !password) {
-            res.status(422).json({
-                status: "failed",
-                data: {
-                    message: "Email and passoword empty. Please populate these fields with valid details.",
-                },
-            });
-            return;
-        }
-        if ((email && !email.includes("@")) || (password && password.length < 6)) {
-            res.status(403).json({
-                status: "failed",
-                data: {
-                    message: "Email or passoword not in proper format. Please populate these fields with valid details.",
-                },
-            });
-            return;
-        }
-        if ((email && email !== "mark@example.io") ||
-            (password && password !== "test1234")) {
-            res.status(403).json({
-                status: "failed",
-                data: {
-                    message: "Email or passoword invalid. Please populate these fields with valid details.",
-                },
-            });
-            return;
-        }
-        if (req.session) {
-            req.session.isLoggedIn = true;
-            res.redirect("/sys-admin");
-            return;
-        }
         res.redirect("/login");
     };
     AuthController.prototype.logoutUserHandler = function (req, res) {
@@ -73,6 +77,7 @@ var AuthController = (function () {
     };
     __decorate([
         (0, decorators_1.Post)("/login"),
+        (0, decorators_1.Validator)(exports.validateUserLogin),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", void 0)
