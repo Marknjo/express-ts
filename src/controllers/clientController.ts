@@ -99,7 +99,7 @@ export const getLoginPage: RequestHandler = (req, res) => {
 
 //// CONVERT THIS CLASS TO BE A DECORATOR CLASS
 
-@Controller
+@Controller()
 class ClientController {
   constructor() {}
 

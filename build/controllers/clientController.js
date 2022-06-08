@@ -55,7 +55,7 @@ var ClientController = (function () {
         __metadata("design:returntype", void 0)
     ], ClientController.prototype, "getLoginPage", null);
     ClientController = __decorate([
-        decorators_1.Controller,
+        (0, decorators_1.Controller)(),
         __metadata("design:paramtypes", [])
     ], ClientController);
     return ClientController;
