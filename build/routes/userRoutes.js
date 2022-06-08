@@ -23,9 +23,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = require("express");
-const authCtr = __importStar(require("../controllers/authController"));
-const router = (0, express_1.Router)();
+var express_1 = require("express");
+var authCtr = __importStar(require("../controllers/authController"));
+var router = (0, express_1.Router)();
 router.route("/login").post(authCtr.loginUseHandler);
 router.route("/logout").get(authCtr.logoutUserHandler);
 exports.default = router;

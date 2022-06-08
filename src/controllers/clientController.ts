@@ -1,9 +1,9 @@
 /// IMPORTS
 
 import { Request, RequestHandler, Response } from "express";
-import Controller from "../library/decorators/controller";
-import { Get } from "../library/decorators/routes";
 import { baseHtmlTemplate } from "../library/views/html-template";
+
+import { Get, Controller } from "../library/decorators";
 
 /// MIDDLEWARE
 
@@ -99,8 +99,10 @@ export const getLoginPage: RequestHandler = (req, res) => {
 
 //// CONVERT THIS CLASS TO BE A DECORATOR CLASS
 
-@Controller("/")
-class LoginController {
+@Controller
+class ClientController {
+  constructor() {}
+
   /**
    * Handles Login Page of the app
    * @param req Express request object
@@ -108,7 +110,7 @@ class LoginController {
    * @returns Renders login html form
    */
   @Get("/login")
-  getLoginPage(req: Request, res: Response) {
+  getLoginPage(req: Request, res: Response): void {
     // Check if user is logged in -> Send user to home page with message already logged in
     if (req.session && req.session.isLoginIn) {
       res.redirect("/");
@@ -145,4 +147,6 @@ class LoginController {
   }
 }
 
-export default LoginController;
+//new ClientController();
+
+//export default ClientController;

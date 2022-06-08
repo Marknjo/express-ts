@@ -1,23 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.baseHtmlTemplate = void 0;
-const baseHtmlTemplate = (content, title) => {
-    return `
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>App ${title ? "| " + title : ""}</title>
-        </head>
-          <body>
-            <div style="display: flex; align-items: center; flex-flow: column nowrap; ">
-              ${title ? "<h1>" + title + "</h1>" : ""}
-              ${content}
-            </div>
-          </body>
-        </html>
-      `;
+var baseHtmlTemplate = function (content, title) {
+    return "\n        <!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n            <meta charset=\"UTF-8\">\n            <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n            <title>App ".concat(title ? "| " + title : "", "</title>\n        </head>\n          <body>\n            <div style=\"display: flex; align-items: center; flex-flow: column nowrap; \">\n              ").concat(title ? "<h1>" + title + "</h1>" : "", "\n              ").concat(content, "\n            </div>\n          </body>\n        </html>\n      ");
 };
 exports.baseHtmlTemplate = baseHtmlTemplate;

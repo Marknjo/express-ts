@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.logoutUserHandler = exports.loginUseHandler = exports.requireAuth = void 0;
-const requireAuth = (req, res, next) => {
+var requireAuth = function (req, res, next) {
     if (req.session && !req.session.isLoggedIn) {
         res
             .status(403)
@@ -11,8 +11,8 @@ const requireAuth = (req, res, next) => {
     next();
 };
 exports.requireAuth = requireAuth;
-const loginUseHandler = (req, res) => {
-    const { email, password } = req.body;
+var loginUseHandler = function (req, res) {
+    var _a = req.body, email = _a.email, password = _a.password;
     if (!email && !password) {
         res.status(422).json({
             status: "failed",
@@ -49,7 +49,7 @@ const loginUseHandler = (req, res) => {
     res.redirect("/login");
 };
 exports.loginUseHandler = loginUseHandler;
-const logoutUserHandler = (req, res) => {
+var logoutUserHandler = function (req, res) {
     if (req.session && req.session.isLoggedIn) {
         req.session.isLoggedIn = undefined;
         res.redirect("/login");

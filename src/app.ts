@@ -6,15 +6,19 @@ import crypto from "crypto";
 // 3rd Party
 import express, { Request, Response } from "express";
 import cookSession from "cookie-session";
-import dotenv from "dotenv";
 
 // local imports
 import "./configs/env.config";
 
-import userRouter from "./routes/userRoutes"; // user api routes
+import AppRouter from "./routes/AppRouter";
 
-import publicRouter from "./routes/publicRoutes"; // Public client routes
-import adminRouter from "./routes/adminRoutes"; // admin client routes
+/// Controllers
+import "./controllers/clientController";
+
+//import userRouter from "./routes/userRoutes"; // user api routes
+
+// import publicRouter from "./routes/publicRoutes"; // Public client routes
+// import adminRouter from "./routes/adminRoutes"; // admin client routes
 
 // INIT APP
 const app = express();
@@ -50,11 +54,12 @@ app.use(
 // API
 const apiV = env.APP_VERSION || "1";
 
-app.use(`/api/v${apiV}/users`, userRouter);
+//app.use(`/api/v${apiV}/users`, userRouter);
 
 // Client Side
-app.use("/sys-admin", adminRouter);
-app.use("/", publicRouter);
+// app.use("/sys-admin", adminRouter);
+// app.use("/", publicRouter);
+app.use(AppRouter.init);
 
 /// START SERVER
 const port = parseInt(env.PORT || "3000");

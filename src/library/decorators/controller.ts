@@ -1,13 +1,16 @@
 import "reflect-metadata";
-import { Router } from "express";
 import { Metadata } from "../types/Metadata";
 import { Methods } from "../types/Methods";
+import AppRouter from "../../routes/AppRouter";
 
-const router = Router();
+// export function Controller(routePrefix: string) {
+//   return function (target: Function) {
+export function Controller(target: Function) {
+  const router = AppRouter.init;
 
-const Controller = (routePrefix: string) => (target: Function) => {
   /// Handle routes
-  for (const methodKey of target.prototype) {
+  for (let methodKey in target.prototype) {
+    /// Routing section
     const routeHandler = target.prototype[methodKey];
 
     const httpMethod: Methods = Reflect.getMetadata(
@@ -15,17 +18,21 @@ const Controller = (routePrefix: string) => (target: Function) => {
       target.prototype,
       methodKey
     );
+
     const routePath = Reflect.getMetadata(
       Metadata.Path,
       target.prototype,
       methodKey
     );
 
+    /// Add Middlewares
+
+    /// Validate routes
+
+    /// Handle route if there is path
     if (routePath) {
-      //router[`${}${httpMethod}`]( routePath )
-      router[httpMethod](`${routePrefix}${routePath}`, routeHandler);
+      router[httpMethod](routePath, routeHandler);
     }
   }
-};
-
-export default Controller;
+}
+// }
