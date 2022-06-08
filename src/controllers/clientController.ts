@@ -1,6 +1,7 @@
 /// IMPORTS
 
 import { Request, RequestHandler, Response } from "express";
+import Controller from "../library/decorators/controller";
 import { Get } from "../library/decorators/routes";
 import { baseHtmlTemplate } from "../library/views/html-template";
 
@@ -98,6 +99,7 @@ export const getLoginPage: RequestHandler = (req, res) => {
 
 //// CONVERT THIS CLASS TO BE A DECORATOR CLASS
 
+@Controller("/")
 class LoginController {
   /**
    * Handles Login Page of the app

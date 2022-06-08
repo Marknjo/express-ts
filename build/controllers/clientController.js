@@ -8,8 +8,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getLoginPage = exports.getHomePage = void 0;
+const controller_1 = __importDefault(require("../library/decorators/controller"));
 const routes_1 = require("../library/decorators/routes");
 const html_template_1 = require("../library/views/html-template");
 const getHomePage = (req, res) => {
@@ -66,7 +70,7 @@ const getLoginPage = (req, res) => {
     res.send((0, html_template_1.baseHtmlTemplate)(loginTemplate, "Login Page"));
 };
 exports.getLoginPage = getLoginPage;
-class LoginController {
+let LoginController = class LoginController {
     getLoginPage(req, res) {
         if (req.session && req.session.isLoginIn) {
             res.redirect("/");
@@ -98,11 +102,14 @@ class LoginController {
   `;
         res.send((0, html_template_1.baseHtmlTemplate)(loginTemplate, "Login Page"));
     }
-}
+};
 __decorate([
     (0, routes_1.Get)("/login"),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)
 ], LoginController.prototype, "getLoginPage", null);
+LoginController = __decorate([
+    (0, controller_1.default)("/")
+], LoginController);
 exports.default = LoginController;
