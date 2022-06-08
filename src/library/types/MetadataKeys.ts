@@ -1,4 +1,4 @@
-export enum Metadata {
+export enum MetadataKeys {
   Path = "path",
   Method = "method",
   Middlewares = "middlewares",

@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Controller = void 0;
 require("reflect-metadata");
-var Metadata_1 = require("../types/Metadata");
+var MetadataKeys_1 = require("../types/MetadataKeys");
 var AppRouter_1 = __importDefault(require("../../routes/AppRouter"));
 var noValidator = function (_1, _2, next) {
     next();
@@ -25,10 +25,10 @@ function Controller(routePrefix) {
         var router = AppRouter_1.default.init;
         for (var methodKey in constructor.prototype) {
             var routeHandler = constructor.prototype[methodKey];
-            var httpMethod = Reflect.getMetadata(Metadata_1.Metadata.Method, constructor.prototype, methodKey);
-            var routePath = Reflect.getMetadata(Metadata_1.Metadata.Path, constructor.prototype, methodKey);
-            var middlewares = Reflect.getMetadata(Metadata_1.Metadata.Middlewares, constructor.prototype, methodKey) || [];
-            var validator = Reflect.getMetadata(Metadata_1.Metadata.Validator, constructor.prototype, methodKey) || noValidator;
+            var httpMethod = Reflect.getMetadata(MetadataKeys_1.MetadataKeys.Method, constructor.prototype, methodKey);
+            var routePath = Reflect.getMetadata(MetadataKeys_1.MetadataKeys.Path, constructor.prototype, methodKey);
+            var middlewares = Reflect.getMetadata(MetadataKeys_1.MetadataKeys.Middlewares, constructor.prototype, methodKey) || [];
+            var validator = Reflect.getMetadata(MetadataKeys_1.MetadataKeys.Validator, constructor.prototype, methodKey) || noValidator;
             if (routePath) {
                 router[httpMethod].apply(router, __spreadArray(__spreadArray(["".concat(routePrefix).concat(routePath), validator], middlewares, false), [routeHandler], false));
             }

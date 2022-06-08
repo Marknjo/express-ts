@@ -2,18 +2,18 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Delete = exports.Put = exports.Patch = exports.Post = exports.Get = void 0;
 require("reflect-metadata");
-var Metadata_1 = require("../types/Metadata");
-var Methods_1 = require("../types/Methods");
+var MetadataKeys_1 = require("../types/MetadataKeys");
+var HttpMethods_1 = require("../types/HttpMethods");
 var routeBinder = function (httpMethod) {
     return function (path) {
         return function (target, methodKey, _1) {
-            Reflect.defineMetadata(Metadata_1.Metadata.Path, path, target, methodKey);
-            Reflect.defineMetadata(Metadata_1.Metadata.Method, httpMethod, target, methodKey);
+            Reflect.defineMetadata(MetadataKeys_1.MetadataKeys.Path, path, target, methodKey);
+            Reflect.defineMetadata(MetadataKeys_1.MetadataKeys.Method, httpMethod, target, methodKey);
         };
     };
 };
-exports.Get = routeBinder(Methods_1.Methods.GET);
-exports.Post = routeBinder(Methods_1.Methods.POST);
-exports.Patch = routeBinder(Methods_1.Methods.PATCH);
-exports.Put = routeBinder(Methods_1.Methods.PUT);
-exports.Delete = routeBinder(Methods_1.Methods.DELETE);
+exports.Get = routeBinder(HttpMethods_1.HttpMethods.GET);
+exports.Post = routeBinder(HttpMethods_1.HttpMethods.POST);
+exports.Patch = routeBinder(HttpMethods_1.HttpMethods.PATCH);
+exports.Put = routeBinder(HttpMethods_1.HttpMethods.PUT);
+exports.Delete = routeBinder(HttpMethods_1.HttpMethods.DELETE);

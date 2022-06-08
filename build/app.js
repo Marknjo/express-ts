@@ -48,7 +48,6 @@ app.use(express_1.default.urlencoded({
     limit: "10kb",
     extended: false,
 }));
-var apiV = process_1.env.APP_VERSION || "1";
 app.use(AppRouter_1.default.init);
 var port = parseInt(process_1.env.PORT || "3000");
 var host = process_1.env.HOST || "127.0.0.1";

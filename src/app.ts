@@ -50,8 +50,7 @@ app.use(
 
 /// ROUTES
 // API
-const apiV = env.APP_VERSION || "1";
-
+//const apiV = env.APP_VERSION || "1";
 //app.use(`/api/v${apiV}/users`, userRouter);
 
 // Client Side

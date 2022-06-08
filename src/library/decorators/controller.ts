@@ -1,6 +1,6 @@
 import "reflect-metadata";
-import { Metadata } from "../types/Metadata";
-import { Methods } from "../types/Methods";
+import { MetadataKeys } from "../types/MetadataKeys";
+import { HttpMethods } from "../types/HttpMethods";
 import AppRouter from "../../routes/AppRouter";
 import { RequestHandler } from "express";
 
@@ -18,14 +18,14 @@ export function Controller(routePrefix: string = "") {
       /// Routing section
       const routeHandler = constructor.prototype[methodKey];
 
-      const httpMethod: Methods = Reflect.getMetadata(
-        Metadata.Method,
+      const httpMethod: HttpMethods = Reflect.getMetadata(
+        MetadataKeys.Method,
         constructor.prototype,
         methodKey
       );
 
       const routePath = Reflect.getMetadata(
-        Metadata.Path,
+        MetadataKeys.Path,
         constructor.prototype,
         methodKey
       );
@@ -33,7 +33,7 @@ export function Controller(routePrefix: string = "") {
       /// Add Middlewares
       const middlewares =
         Reflect.getMetadata(
-          Metadata.Middlewares,
+          MetadataKeys.Middlewares,
           constructor.prototype,
           methodKey
         ) || [];
@@ -41,7 +41,7 @@ export function Controller(routePrefix: string = "") {
       /// Validator
       const validator =
         Reflect.getMetadata(
-          Metadata.Validator,
+          MetadataKeys.Validator,
           constructor.prototype,
           methodKey
         ) || noValidator;

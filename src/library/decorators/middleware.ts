@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import { RequestHandler } from "express";
-import { Metadata } from "../types/Metadata";
+import { MetadataKeys } from "../types/MetadataKeys";
 
 export function Middleware(middleware: RequestHandler) {
   return function (
@@ -10,11 +10,12 @@ export function Middleware(middleware: RequestHandler) {
   ) {
     /// Get existing middlewares
     const middlewares =
-      Reflect.getMetadata(Metadata.Middlewares, constructor, methodKey) || [];
+      Reflect.getMetadata(MetadataKeys.Middlewares, constructor, methodKey) ||
+      [];
 
     /// define new middleware
     Reflect.defineMetadata(
-      Metadata.Middlewares,
+      MetadataKeys.Middlewares,
       [...middlewares, middleware],
       constructor,
       methodKey

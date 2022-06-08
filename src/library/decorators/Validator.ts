@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import { RequestHandler } from "express";
-import { Metadata } from "../types/Metadata";
+import { MetadataKeys } from "../types/MetadataKeys";
 
 export function Validator(validator: RequestHandler) {
   return function (
@@ -9,7 +9,7 @@ export function Validator(validator: RequestHandler) {
     _desc: PropertyDescriptor
   ) {
     Reflect.defineMetadata(
-      Metadata.Validator,
+      MetadataKeys.Validator,
       validator,
       constructor,
       methodKey
