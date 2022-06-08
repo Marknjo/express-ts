@@ -9,14 +9,7 @@ import cookSession from "cookie-session";
 // local imports
 import "./configs/env.config";
 
-import AppRouter from "./routes/AppRouter";
-
-/// Controllers
-import "./controllers/clientController";
-import "./controllers/adminController";
-import "./controllers/authController";
-
-// import adminRouter from "./routes/adminRoutes"; // admin client routes
+import { AppRouter } from "./routes";
 
 // INIT APP
 const app = express();

@@ -8,21 +8,18 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     }
     return to.concat(ar || Array.prototype.slice.call(from));
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Controller = void 0;
 require("reflect-metadata");
 var MetadataKeys_1 = require("../types/MetadataKeys");
-var AppRouter_1 = __importDefault(require("../../routes/AppRouter"));
+var AppRouter_1 = require("../../routes/AppRouter");
 var noValidator = function (_1, _2, next) {
     next();
 };
 function Controller(routePrefix) {
     if (routePrefix === void 0) { routePrefix = ""; }
     return function (constructor) {
-        var router = AppRouter_1.default.init;
+        var router = AppRouter_1.AppRouter.init;
         for (var methodKey in constructor.prototype) {
             var routeHandler = constructor.prototype[methodKey];
             var httpMethod = Reflect.getMetadata(MetadataKeys_1.MetadataKeys.Method, constructor.prototype, methodKey);

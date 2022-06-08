@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.AppRouter = void 0;
 var express_1 = require("express");
 var AppRouter = (function () {
     function AppRouter() {
@@ -16,4 +17,4 @@ var AppRouter = (function () {
     });
     return AppRouter;
 }());
-exports.default = AppRouter;
+exports.AppRouter = AppRouter;

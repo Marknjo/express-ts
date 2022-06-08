@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-class AppRouter {
+export class AppRouter {
   private static instance: Router;
 
   /**
@@ -14,5 +14,3 @@ class AppRouter {
     return AppRouter.instance;
   }
 }
-
-export default AppRouter;

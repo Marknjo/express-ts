@@ -30,10 +30,7 @@ var process_1 = __importStar(require("process"));
 var express_1 = __importDefault(require("express"));
 var cookie_session_1 = __importDefault(require("cookie-session"));
 require("./configs/env.config");
-var AppRouter_1 = __importDefault(require("./routes/AppRouter"));
-require("./controllers/clientController");
-require("./controllers/adminController");
-require("./controllers/authController");
+var routes_1 = require("./routes");
 var app = (0, express_1.default)();
 var expires = parseInt(process_1.env.SESSION_EXPIRES || "21600", 10);
 var sessionKeys = process_1.env.SESSION_KEYS || "my_encrypted_keys";
@@ -48,7 +45,7 @@ app.use(express_1.default.urlencoded({
     limit: "10kb",
     extended: false,
 }));
-app.use(AppRouter_1.default.init);
+app.use(routes_1.AppRouter.init);
 var port = parseInt(process_1.env.PORT || "3000");
 var host = process_1.env.HOST || "127.0.0.1";
 var server = app.listen(port, host, function () {

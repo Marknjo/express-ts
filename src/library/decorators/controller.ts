@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import { MetadataKeys } from "../types/MetadataKeys";
 import { HttpMethods } from "../types/HttpMethods";
-import AppRouter from "../../routes/AppRouter";
+import { AppRouter } from "../../routes/AppRouter";
 import { RequestHandler } from "express";
 
 ///
