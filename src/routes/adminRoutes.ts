@@ -4,8 +4,8 @@
 // IMPORTS
 
 import { Router } from "express";
-import { appendFile } from "fs";
-import { baseHtmlTemplate } from "../views/html-template";
+import * as admCtr from "../controllers/adminController";
+import * as authCtr from "../controllers/authController";
 
 // INIT ROUTER
 const router = Router();
@@ -13,11 +13,7 @@ const router = Router();
 // MIDDLEWARES
 
 // ROUTES
-router.get("/", (req, res) => {
-  const dashboardTemplate = `<p>Welcome to app dashboard</p>`;
-
-  res.send(baseHtmlTemplate(dashboardTemplate, "Dashboard"));
-});
+router.get("/", authCtr.requireAuth, admCtr.getDashboard);
 
 // EXPORT
 export default router;

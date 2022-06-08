@@ -53,8 +53,8 @@ const apiV = env.APP_VERSION || "1";
 app.use(`/api/v${apiV}/users`, userRouter);
 
 // Client Side
-app.use("/", publicRouter);
 app.use("/sys-admin", adminRouter);
+app.use("/", publicRouter);
 
 /// START SERVER
 const port = parseInt(env.PORT || "3000");
