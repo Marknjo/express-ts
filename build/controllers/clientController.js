@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getLoginPage = exports.getHomePage = void 0;
-const html_template_1 = require("../views/html-template");
+const html_template_1 = require("../library/views/html-template");
 const getHomePage = (req, res) => {
     const loginErrorHtmlTmp = `
     <p>You are not logged in.</p>

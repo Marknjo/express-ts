@@ -1,7 +1,7 @@
 // IMPORTS
 
 import { RequestHandler } from "express";
-import { baseHtmlTemplate } from "../views/html-template";
+import { baseHtmlTemplate } from "../library/views/html-template";
 
 // HANDLERS
 
