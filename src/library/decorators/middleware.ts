@@ -1,12 +1,13 @@
 import "reflect-metadata";
 import { RequestHandler } from "express";
 import { MetadataKeys } from "../types/MetadataKeys";
+import { HandlerDescriptor } from "../types/HandlerDesciptor";
 
 export function Middleware(middleware: RequestHandler) {
   return function (
     constructor: any,
     methodKey: string,
-    _desc: PropertyDescriptor
+    _desc: HandlerDescriptor
   ) {
     /// Get existing middlewares
     const middlewares =
