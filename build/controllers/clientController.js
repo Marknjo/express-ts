@@ -1,25 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getLoginPage = exports.getHomePage = void 0;
-const htmlTemplate = (content, title) => {
-    return `
-      <!DOCTYPE html>
-      <html lang="en">
-      <head>
-          <meta charset="UTF-8">
-          <meta http-equiv="X-UA-Compatible" content="IE=edge">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>App ${title ? "| " + title : ""}</title>
-      </head>
-        <body>
-          <div style="display: flex; align-items: center; flex-flow: column nowrap; ">
-            ${title ? "<h1>" + title + "</h1>" : ""}
-            ${content}
-          </div>
-        </body>
-      </html>
-    `;
-};
+const html_template_1 = require("../views/html-template");
 const getHomePage = (req, res) => {
     const loginErrorHtmlTmp = `
     <p>You are not logged in.</p>
@@ -30,16 +12,16 @@ const getHomePage = (req, res) => {
     <a href="/api/v1/users/logout" style="display: block">Logout</a>
     `;
     if (req.session && !req.session.isLoggedIn) {
-        res.send(htmlTemplate(loginErrorHtmlTmp, "Home page"));
+        res.send((0, html_template_1.baseHtmlTemplate)(loginErrorHtmlTmp, "Home page"));
         return;
     }
     const sessionExpires = new Date(req.sessionOptions.expires).getTime();
     const timeDiff = sessionExpires > Date.now();
     if (!timeDiff) {
-        res.send(htmlTemplate(loginErrorHtmlTmp, "Home page"));
+        res.send((0, html_template_1.baseHtmlTemplate)(loginErrorHtmlTmp, "Home page"));
         return;
     }
-    res.send(htmlTemplate(successLoggedInuserHtmlTmp, "Home page"));
+    res.send((0, html_template_1.baseHtmlTemplate)(successLoggedInuserHtmlTmp, "Home page"));
 };
 exports.getHomePage = getHomePage;
 const getLoginPage = (req, res) => {
@@ -71,6 +53,6 @@ const getLoginPage = (req, res) => {
         </div>
      </form>
   `;
-    res.send(htmlTemplate(loginTemplate, "Login Page"));
+    res.send((0, html_template_1.baseHtmlTemplate)(loginTemplate, "Login Page"));
 };
 exports.getLoginPage = getLoginPage;

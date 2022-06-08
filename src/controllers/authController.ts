@@ -83,7 +83,7 @@ export const loginUseHandler: RequestHandler = (req, res) => {
   /// Valid user goes to the protected route -> By stamping session.isLoggedIn
   if (req.session) {
     req.session.isLoggedIn = true;
-    res.redirect("/sys-admin/protected");
+    res.redirect("/sys-admin");
     return;
   }
 

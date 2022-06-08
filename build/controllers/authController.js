@@ -1,6 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.logoutUserHandler = exports.loginUseHandler = void 0;
+exports.logoutUserHandler = exports.loginUseHandler = exports.requireAuth = void 0;
+const requireAuth = (req, res, next) => {
+    if (req.session && !req.session.isLoggedIn) {
+        res
+            .status(403)
+            .send("You are not unauthorized to access this route. Please login.");
+        return;
+    }
+    next();
+};
+exports.requireAuth = requireAuth;
 const loginUseHandler = (req, res) => {
     const { email, password } = req.body;
     if (!email && !password) {
@@ -33,7 +43,7 @@ const loginUseHandler = (req, res) => {
     }
     if (req.session) {
         req.session.isLoggedIn = true;
-        res.redirect("/sys-admin/protected");
+        res.redirect("/sys-admin");
         return;
     }
     res.redirect("/login");

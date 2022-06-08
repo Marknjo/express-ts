@@ -5,6 +5,7 @@
 
 import { Router } from "express";
 import { appendFile } from "fs";
+import { baseHtmlTemplate } from "../views/html-template";
 
 // INIT ROUTER
 const router = Router();
@@ -13,7 +14,9 @@ const router = Router();
 
 // ROUTES
 router.get("/", (req, res) => {
-  res.send("Welcome to dashboard");
+  const dashboardTemplate = `<p>Welcome to app dashboard</p>`;
+
+  res.send(baseHtmlTemplate(dashboardTemplate, "Dashboard"));
 });
 
 // EXPORT
