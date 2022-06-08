@@ -1,7 +1,7 @@
 // IMPORTS
 
 import { Request, Response } from "express";
-import { Controller, Get, Middleware } from "../library/decorators";
+import { Controller, Get, Middlewares } from "../library/decorators";
 import { baseHtmlTemplate } from "../library/views/html-template";
 import { requireAuth } from "./authController";
 
@@ -22,7 +22,7 @@ class AdminController {
    * @returns Renders login html form
    */
   @Get("/")
-  @Middleware(requireAuth)
+  @Middlewares(requireAuth)
   getDashboard(_1: Request, res: Response) {
     const dashboardTemplate = `
        <p>Welcome to app dashboard</p> 

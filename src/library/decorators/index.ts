@@ -1,4 +1,4 @@
 export * from "./controller";
 export * from "./routes";
-export * from "./middleware";
+export * from "./middlewares";
 export * from "./Validator";

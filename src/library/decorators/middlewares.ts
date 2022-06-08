@@ -3,7 +3,7 @@ import { RequestHandler } from "express";
 import { MetadataKeys } from "../types/MetadataKeys";
 import { HandlerDescriptor } from "../types/HandlerDesciptor";
 
-export function Middleware(middleware: RequestHandler) {
+export function Middlewares(middleware: RequestHandler) {
   return function (
     constructor: any,
     methodKey: string,

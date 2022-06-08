@@ -21,7 +21,7 @@ var AdminController = (function () {
     };
     __decorate([
         (0, decorators_1.Get)("/"),
-        (0, decorators_1.Middleware)(authController_1.requireAuth),
+        (0, decorators_1.Middlewares)(authController_1.requireAuth),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", void 0)
