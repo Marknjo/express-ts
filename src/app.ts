@@ -13,6 +13,7 @@ import AppRouter from "./routes/AppRouter";
 
 /// Controllers
 import "./controllers/clientController";
+import "./controllers/adminController";
 import "./controllers/authController";
 
 // import adminRouter from "./routes/adminRoutes"; // admin client routes

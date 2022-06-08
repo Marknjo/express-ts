@@ -1,6 +1,7 @@
 // IMPORTS
 
-import { RequestHandler } from "express";
+import { Request, Response } from "express";
+import { Controller, Get } from "../library/decorators";
 import { baseHtmlTemplate } from "../library/views/html-template";
 
 // HANDLERS
@@ -9,13 +10,23 @@ import { baseHtmlTemplate } from "../library/views/html-template";
 
 // 2). NORMAL HANDLERS
 
-export const getDashboard: RequestHandler = (req, res) => {
-  const dashboardTemplate = `
-     <p>Welcome to app dashboard</p> 
-     <a href="/api/v1/users/logout" style="display: block">Logout</a>
-    `;
-
-  res.send(baseHtmlTemplate(dashboardTemplate, "Dashboard"));
-};
-
 // 3). CRUD HANDLERS
+
+@Controller("/sys-admin")
+class AdminController {
+  /**
+   * Handles Admin dashboard page
+   * @param _1 Express request object
+   * @param res Express Response object
+   * @returns Renders login html form
+   */
+  @Get("/")
+  getDashboard(_1: Request, res: Response) {
+    const dashboardTemplate = `
+       <p>Welcome to app dashboard</p> 
+       <a href="/api/v1/users/logout" style="display: block">Logout</a>
+      `;
+
+    res.send(baseHtmlTemplate(dashboardTemplate, "Dashboard"));
+  }
+}
