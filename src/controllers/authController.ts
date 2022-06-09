@@ -3,6 +3,7 @@
 import { env } from "process";
 import { Request, RequestHandler, Response } from "express";
 import { Post, Controller, Get, Validator } from "../library/decorators";
+import { userRouter } from "../routes/userRoutes";
 
 /// MIDDLEWARES
 
@@ -79,7 +80,8 @@ export const validateUserLogin: RequestHandler = (req, res, next) => {
 /// CRUD HNDLERS
 const apiV = env.APP_VERSION || "1";
 
-@Controller(`/api/v${apiV}/users`)
+// @Controller(`/api/v${apiV}/users`)
+@Controller(userRouter)
 class AuthController {
   /**
    * Handles Login form of the app

@@ -45,7 +45,10 @@ app.use(express_1.default.urlencoded({
     limit: "10kb",
     extended: false,
 }));
-app.use(routes_1.AppRouter.init);
+var apiV = process_1.env.APP_VERSION || "1";
+app.use("/api/v".concat(apiV, "/users"), routes_1.userRouter);
+app.use("/", routes_1.clientRouter);
+app.use("/sys-admin", routes_1.adminRouter);
 var port = parseInt(process_1.env.PORT || "3000");
 var host = process_1.env.HOST || "127.0.0.1";
 var server = app.listen(port, host, function () {

@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.validateUserLogin = exports.requireAuth = void 0;
 var process_1 = require("process");
 var decorators_1 = require("../library/decorators");
+var userRoutes_1 = require("../routes/userRoutes");
 var requireAuth = function (req, res, next) {
     if (req.session && !req.session.isLoggedIn) {
         res
@@ -89,7 +90,7 @@ var AuthController = (function () {
         __metadata("design:returntype", void 0)
     ], AuthController.prototype, "logoutUserHandler", null);
     AuthController = __decorate([
-        (0, decorators_1.Controller)("/api/v".concat(apiV, "/users"))
+        (0, decorators_1.Controller)(userRoutes_1.userRouter)
     ], AuthController);
     return AuthController;
 }());

@@ -4,12 +4,12 @@ import { Request, RequestHandler, Response } from "express";
 import { baseHtmlTemplate } from "../library/views/html-template";
 
 import { Get, Controller } from "../library/decorators";
+import { clientRouter } from "../routes/clientRoutes";
 
 /// MIDDLEWARE
 
 //// CONVERT THIS CLASS TO BE A DECORATOR CLASS
-
-@Controller()
+@Controller(clientRouter)
 class ClientController {
   constructor() {}
 
@@ -71,6 +71,7 @@ class ClientController {
 
     const successLoggedInuserHtmlTmp = `
     <p>You are currently logged in.</p>
+    <a href="/sys-admin" style="display: block; margin-bottom: 20px">Dashboard</a>
     <a href="/api/v1/users/logout" style="display: block">Logout</a>
     `;
 

@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var html_template_1 = require("../library/views/html-template");
 var decorators_1 = require("../library/decorators");
+var clientRoutes_1 = require("../routes/clientRoutes");
 var ClientController = (function () {
     function ClientController() {
     }
@@ -24,7 +25,7 @@ var ClientController = (function () {
     };
     ClientController.prototype.getHomePage = function (req, res) {
         var loginErrorHtmlTmp = "\n    <p>You are not logged in.</p>\n    <a href=\"/login\" style=\"display: block\">Login Now</a>\n    ";
-        var successLoggedInuserHtmlTmp = "\n    <p>You are currently logged in.</p>\n    <a href=\"/api/v1/users/logout\" style=\"display: block\">Logout</a>\n    ";
+        var successLoggedInuserHtmlTmp = "\n    <p>You are currently logged in.</p>\n    <a href=\"/sys-admin\" style=\"display: block; margin-bottom: 20px\">Dashboard</a>\n    <a href=\"/api/v1/users/logout\" style=\"display: block\">Logout</a>\n    ";
         if (req.session && !req.session.isLoggedIn) {
             res.send((0, html_template_1.baseHtmlTemplate)(loginErrorHtmlTmp, "Home page"));
             return;
@@ -50,7 +51,7 @@ var ClientController = (function () {
         __metadata("design:returntype", void 0)
     ], ClientController.prototype, "getHomePage", null);
     ClientController = __decorate([
-        (0, decorators_1.Controller)(),
+        (0, decorators_1.Controller)(clientRoutes_1.clientRouter),
         __metadata("design:paramtypes", [])
     ], ClientController);
     return ClientController;

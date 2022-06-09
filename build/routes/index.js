@@ -18,3 +18,6 @@ require("../controllers/adminController");
 require("../controllers/authController");
 require("../controllers/clientController");
 __exportStar(require("./AppRouter"), exports);
+__exportStar(require("./clientRoutes"), exports);
+__exportStar(require("./adminRoutes"), exports);
+__exportStar(require("./userRoutes"), exports);

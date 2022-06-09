@@ -18,3 +18,4 @@ __exportStar(require("./controller"), exports);
 __exportStar(require("./routes"), exports);
 __exportStar(require("./middlewares"), exports);
 __exportStar(require("./Validator"), exports);
+__exportStar(require("./mergeRoute"), exports);

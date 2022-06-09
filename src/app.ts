@@ -9,7 +9,8 @@ import cookSession from "cookie-session";
 // local imports
 import "./configs/env.config";
 
-import { AppRouter } from "./routes";
+// import { AppRouter } from "./routes";
+import { clientRouter, adminRouter, userRouter } from "./routes";
 
 // INIT APP
 const app = express();
@@ -42,13 +43,14 @@ app.use(
 );
 
 /// ROUTES
+// app.use(AppRouter.init);
 // API
-//const apiV = env.APP_VERSION || "1";
-//app.use(`/api/v${apiV}/users`, userRouter);
+const apiV = env.APP_VERSION || "1";
+app.use(`/api/v${apiV}/users`, userRouter);
 
 // Client Side
-// app.use("/sys-admin", adminRouter);
-app.use(AppRouter.init);
+app.use("/", clientRouter);
+app.use("/sys-admin", adminRouter);
 
 /// START SERVER
 const port = parseInt(env.PORT || "3000");

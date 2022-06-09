@@ -12,14 +12,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Controller = void 0;
 require("reflect-metadata");
 var MetadataKeys_1 = require("../types/MetadataKeys");
-var AppRouter_1 = require("../../routes/AppRouter");
 var noValidator = function (_1, _2, next) {
     next();
 };
-function Controller(routePrefix) {
-    if (routePrefix === void 0) { routePrefix = ""; }
+function Controller(router) {
     return function (constructor) {
-        var router = AppRouter_1.AppRouter.init;
         for (var methodKey in constructor.prototype) {
             var routeHandler = constructor.prototype[methodKey];
             var httpMethod = Reflect.getMetadata(MetadataKeys_1.MetadataKeys.Method, constructor.prototype, methodKey);
@@ -27,7 +24,8 @@ function Controller(routePrefix) {
             var middlewares = Reflect.getMetadata(MetadataKeys_1.MetadataKeys.Middlewares, constructor.prototype, methodKey) || [];
             var validator = Reflect.getMetadata(MetadataKeys_1.MetadataKeys.Validator, constructor.prototype, methodKey) || noValidator;
             if (routePath) {
-                router[httpMethod].apply(router, __spreadArray(__spreadArray(["".concat(routePrefix).concat(routePath), validator], middlewares, false), [routeHandler], false));
+                router[httpMethod].apply(router, __spreadArray(__spreadArray([routePath,
+                    validator], middlewares, false), [routeHandler], false));
             }
         }
     };

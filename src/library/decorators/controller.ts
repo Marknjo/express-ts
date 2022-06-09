@@ -1,18 +1,16 @@
 import "reflect-metadata";
 import { MetadataKeys } from "../types/MetadataKeys";
 import { HttpMethods } from "../types/HttpMethods";
-import { AppRouter } from "../../routes/AppRouter";
-import { RequestHandler } from "express";
+import { RequestHandler, Router } from "express";
 
 ///
 const noValidator: RequestHandler = (_1, _2, next) => {
   next();
 };
 
-export function Controller(routePrefix: string = "") {
+// export function Controller(routePrefix: string = "") {
+export function Controller(router: Router) {
   return function (constructor: Function) {
-    const router = AppRouter.init;
-
     /// Handle routes
     for (let methodKey in constructor.prototype) {
       /// Routing section
@@ -49,7 +47,8 @@ export function Controller(routePrefix: string = "") {
       /// Handle route if there is path
       if (routePath) {
         router[httpMethod](
-          `${routePrefix}${routePath}`,
+          // `${routePrefix}${routePath}`,
+          routePath,
           validator,
           ...middlewares,
           routeHandler
